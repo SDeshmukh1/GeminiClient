@@ -20,7 +20,7 @@ public class TestCreateBusinessAccount extends TestBase{
         sendTextToTextBox("//input[@name='personal.email']","abc@gmail.com");
         scrollWindow();
         clickElementByXpath("//*[text()='Continue']");
-○        waitforElementToBePresent("//div[@class='NarrowTitle']/h3");
+        waitforElementToBePresent("//div[@class='NarrowTitle']/h3");
         verifyCurrentURL("https://exchange.sandbox.gemini.com/register/institution/thanks");
         Assert.assertEquals(getTextOfElementByXpath("//div[@class='NarrowTitle']/h3"),"Thanks for Registering!","Registration Confirmation Message is not proper");
     }
