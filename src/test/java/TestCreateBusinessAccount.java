@@ -20,12 +20,24 @@ public class TestCreateBusinessAccount extends TestBase{
         sendTextToTextBox("//input[@name='personal.email']","abc@gmail.com");
         scrollWindow();
         clickElementByXpath("//*[text()='Continue']");
-        waitforElementToBePresent("//div[@class='NarrowTitle']/h3");
+○        waitforElementToBePresent("//div[@class='NarrowTitle']/h3");
         verifyCurrentURL("https://exchange.sandbox.gemini.com/register/institution/thanks");
         Assert.assertEquals(getTextOfElementByXpath("//div[@class='NarrowTitle']/h3"),"Thanks for Registering!","Registration Confirmation Message is not proper");
     }
 
-
+    @Test
+    public void testRequiredFieldErrorMessage()
+    {
+        clickElementByXpath("//a[@data-testid='goToRegister']");
+        clickElementByXpath("//a[@data-testid='cookiePolicyAgreement-close']");
+        scrollWindow();
+        clickElementByXpath("//*[text()='Create a business account']");
+        verifyCurrentURL("https://exchange.sandbox.gemini.com/register/institution");
+        scrollWindow();
+        clickElementByXpath("//*[text()='Continue']");
+        waitforElementToBePresent("//div[@class='AlertBody']");
+        Assert.assertTrue(getWebElementByXpath("//div[@class='AlertBody']").isDisplayed(),"Expected Error Message not found");
+    }
 
     @Test
     public void testRegistrationWithIncorrectEmail()
@@ -62,5 +74,4 @@ public class TestCreateBusinessAccount extends TestBase{
         clickElementByXpath("//*[text()='State']/following-sibling::div/div");
         selectValueFromDropDown(s);
     }
-
 }
